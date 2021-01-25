@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="smarttimetable.main.windows.HomeFragment"
+        android:name="smarttimetable.main.windows.homefragment.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 

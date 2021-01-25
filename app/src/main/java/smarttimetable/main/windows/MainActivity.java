@@ -2,10 +2,7 @@ package smarttimetable.main.windows;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
@@ -23,6 +20,7 @@ import java.util.ArrayList;
 
 import smarttimetable.main.Lesson;
 import smarttimetable.main.R;
+import smarttimetable.main.windows.homefragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -99,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
+    /*
     private void ddd()
     {
         String destFileName = "img.jpg";
@@ -106,4 +105,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         File dest = new File(Environment.getExternalStorageDirectory() + "/Download/" + destFileName);
         new LoadFile(src, dest).start();
     }
+    */
+
 }
