@@ -36,4 +36,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'commons-io:commons-io:2.4'
     compile 'com.google.code.gson:gson:2.8.5'
+    compile 'org.apache.poi:poi:3.9'
 }
