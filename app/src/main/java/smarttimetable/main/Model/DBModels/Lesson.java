@@ -1,28 +1,8 @@
 package smarttimetable.main.Model.DBModels;
 
+import android.os.Parcelable;
+
 public class Lesson {
-    int idtimetable;
-    int Subject;
-    String Date;
-    int Day;
-    int Week;
-    int Teacher;
-    int Group;
-    int Course;
-    String Time;
-
-    public Lesson(int idtimetable, int subject, String date, int day, int week, int teacher, int group, int course, String time) {
-        this.idtimetable = idtimetable;
-        Subject = subject;
-        Date = date;
-        Day = day;
-        Week = week;
-        Teacher = teacher;
-        Group = group;
-        Course = course;
-        Time = time;
-    }
-
     public int getIdtimetable() {
         return idtimetable;
     }
@@ -31,12 +11,12 @@ public class Lesson {
         this.idtimetable = idtimetable;
     }
 
-    public int getSubject() {
-        return Subject;
+    public int getSubjectId() {
+        return SubjectId;
     }
 
-    public void setSubject(int subject) {
-        Subject = subject;
+    public void setSubjectId(int subjectId) {
+        SubjectId = subjectId;
     }
 
     public String getDate() {
@@ -47,44 +27,44 @@ public class Lesson {
         Date = date;
     }
 
-    public int getDay() {
-        return Day;
+    public int getDayId() {
+        return DayId;
     }
 
-    public void setDay(int day) {
-        Day = day;
+    public void setDayId(int dayId) {
+        DayId = dayId;
     }
 
-    public int getWeek() {
-        return Week;
+    public int getWeekId() {
+        return WeekId;
     }
 
-    public void setWeek(int week) {
-        Week = week;
+    public void setWeekId(int weekId) {
+        WeekId = weekId;
     }
 
-    public int getTeacher() {
-        return Teacher;
+    public int getTeacherId() {
+        return TeacherId;
     }
 
-    public void setTeacher(int teacher) {
-        Teacher = teacher;
+    public void setTeacherId(int teacherId) {
+        TeacherId = teacherId;
     }
 
-    public int getGroup() {
-        return Group;
+    public int getGroupId() {
+        return GroupId;
     }
 
-    public void setGroup(int group) {
-        Group = group;
+    public void setGroupId(int groupId) {
+        GroupId = groupId;
     }
 
-    public int getCourse() {
-        return Course;
+    public int getCourseId() {
+        return CourseId;
     }
 
-    public void setCourse(int course) {
-        Course = course;
+    public void setCourseId(int courseId) {
+        CourseId = courseId;
     }
 
     public String getTime() {
@@ -92,6 +72,29 @@ public class Lesson {
     }
 
     public void setTime(String time) {
+        Time = time;
+    }
+
+    int idtimetable;
+    int SubjectId;
+    String Date;
+    int DayId;
+    int WeekId;
+    int TeacherId;
+    int GroupId;
+    int CourseId;
+    String Time;
+
+
+    public Lesson(int idtimetable, int subjectId, String date, int dayId, int weekId, int teacherId, int groupId, int courseId, String time) {
+        this.idtimetable = idtimetable;
+        SubjectId = subjectId;
+        Date = date;
+        DayId = dayId;
+        WeekId = weekId;
+        TeacherId = teacherId;
+        GroupId = groupId;
+        CourseId = courseId;
         Time = time;
     }
 }

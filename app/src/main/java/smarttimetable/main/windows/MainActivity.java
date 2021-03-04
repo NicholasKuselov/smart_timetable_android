@@ -1,5 +1,6 @@
 package smarttimetable.main.windows;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -18,13 +19,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 
-import smarttimetable.main.Lesson;
+import smarttimetable.main.JSONController;
+import smarttimetable.main.Model.DataBase;
+import smarttimetable.main.Model.DataBaseOperation;
+import smarttimetable.main.Model.WebModel.API;
+import smarttimetable.main.Model.WebModel.RequestHandler;
 import smarttimetable.main.R;
 import smarttimetable.main.windows.homefragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public ArrayList<Lesson> LessonsMas = new ArrayList<Lesson>();
+    //public ArrayList<Lesson> LessonsMas = new ArrayList<Lesson>();
 
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -33,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        JSONController.testJson(this);
+
+        DataBaseOperation.ConnectToDb();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
 
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_all_lessons, R.id.nav_user_lessons).setDrawerLayout(drawer).build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home,R.id.nav_timetable, R.id.nav_all_lessons, R.id.nav_user_lessons).setDrawerLayout(drawer).build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -61,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id)
         {
+            case R.id.nav_timetable:
+                fragmentClass = TimetableFragment.class;
+                break;
             case R.id.nav_home:
                 fragmentClass = HomeFragment.class;
                 break;
@@ -96,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
+
 
     /*
     private void ddd()

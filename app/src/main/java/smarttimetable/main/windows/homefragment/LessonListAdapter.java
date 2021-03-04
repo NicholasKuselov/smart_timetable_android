@@ -2,35 +2,18 @@ package smarttimetable.main.windows.homefragment;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import smarttimetable.main.Lesson;
+import smarttimetable.main.Model.DBModels.Lesson;
 import smarttimetable.main.R;
 
 public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.ViewHolder>{
@@ -90,7 +73,7 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
         Lesson lessonItem = lessonItems.get(position);
 
         //holder.imageView.setImageResource(phone.getImage());
-        holder.itemName.setText(lessonItem.getName());
+       // holder.itemName.setText(lessonItem.getName());
         //holder.b_delete.setVisibility(View.INVISIBLE);
         holder.itemTime.setText(lessonItem.getTime());
 
@@ -113,8 +96,8 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Lesson passItem = lessonItems.get(getLayoutPosition());
-                    onItemClickListener.onItemClick(passItem);
+                    //Lesson passItem = lessonItems.get(getLayoutPosition());
+                    //onItemClickListener.onItemClick(passItem);
                 }
             });
 
@@ -125,4 +108,6 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
         }
 
     }
+
+
 }

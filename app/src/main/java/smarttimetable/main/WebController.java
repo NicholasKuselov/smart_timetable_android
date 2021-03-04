@@ -15,6 +15,7 @@ import java.net.URL;
 //https://drive.google.com/u/0/uc?id=1qrXFAzRtvdpXvuUhzSy9d065MbVkA55q&export=download
 
 public class WebController {
+
     private void onDownloadComplete(boolean success) {
         // файл скачался, можно как-то реагировать
         Log.i("***", "************** " + success);

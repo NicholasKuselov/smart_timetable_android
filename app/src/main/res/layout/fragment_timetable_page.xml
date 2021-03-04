@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
-    tools:context=".windows.TimetableFragment">
+    tools:context=".TimetablePage">
 
-    <androidx.viewpager2.widget.ViewPager2
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+
+        android:id="@+id/testText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"  />
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"
+        android:textSize="36sp" />
 
 </FrameLayout>
