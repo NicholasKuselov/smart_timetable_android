@@ -41,10 +41,11 @@ public class JSONController {
 
     public static List<Week> importWeeksFromJSON(String jsonString) {
         //jsonString = "[" +jsonString.split("\\[")[1].split("\\]")[0] + "]";
-        Log.println(Log.INFO,"ssssssss",jsonString);
+        Log.println(Log.INFO,"ssssssfgfgss",jsonString);
         try{
             Gson gson = new Gson();
             WeekDataItems dataItems = gson.fromJson(jsonString, WeekDataItems.class);
+
             return  dataItems.getWeeks();
         }
         catch (Exception ex){
@@ -97,6 +98,7 @@ public class JSONController {
     public static List<Lesson> importLessonsFromJSON(String jsonString) {
 
         try{
+            Log.println(Log.INFO,"qqqqqqqqqqqq",jsonString);
             Gson gson = new Gson();
             LessonDataItems dataItems = gson.fromJson(jsonString, LessonDataItems.class);
             return  dataItems.getLessons();

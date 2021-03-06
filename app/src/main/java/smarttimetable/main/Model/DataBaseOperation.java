@@ -3,7 +3,9 @@ package smarttimetable.main.Model;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import smarttimetable.main.JSONController;
 import smarttimetable.main.Model.DBModels.*;
@@ -85,6 +87,34 @@ public class DataBaseOperation {
         return null;
     }
 
+    public static ArrayList<Lesson> GetLessonByGroupAndCourse(GroupForView GroupAndCourse)
+    {
+        ArrayList<Lesson> tmp = new ArrayList<>();
+        for (int i = 0; i< DataBase.CurrentWeekLessons.size(); i++)
+        {
+            if (DataBase.CurrentWeekLessons.get(i).getGroupId() == GroupAndCourse.group.getIdgroup() && DataBase.CurrentWeekLessons.get(i).getCourseId() == GroupAndCourse.course.getIdcourse())
+            {
+                tmp.add(DataBase.CurrentWeekLessons.get(i));
+            }
+        }
+
+        return tmp;
+    }
+
+    public static List<Lesson> GetLessonsByDay(ArrayList<Lesson> lessons, Day day)
+    {
+        List<Lesson> tmp = new ArrayList<>();
+
+        for (int i = 0; i< lessons.size(); i++)
+        {
+            if (lessons.get(i).getDayId() == day.getIdDay())
+            {
+                tmp.add(lessons.get(i));
+            }
+        }
+        return tmp;
+    }
+
     public static void CreateGroupsForView()
     {
         for(int i = 0; i < DataBase.Courses.size(); i++)
@@ -96,26 +126,25 @@ public class DataBaseOperation {
         }
     }
 
-    public static void ConnectToDb()
+    public static boolean ConnectToDb()
     {
+        //if(!RequestHandler.isOnline()) return false;
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                Log.println(Log.INFO,"tessss",RequestHandler.sendGetRequest(API.URL_GET_Weeks));
+
                 DataBase.Weeks = new ArrayList<>(JSONController.importWeeksFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Weeks)));
                 DataBase.Days = new ArrayList<>(JSONController.importDaysFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Days)));
                 DataBase.Groups = new ArrayList<>(JSONController.importGroupsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Groups)));
                 DataBase.Courses = new ArrayList<>(JSONController.importCoursesFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Courses)));
                 DataBase.Subjects = new ArrayList<>(JSONController.importSubjectsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Subjects)));
                 DataBase.Teachers = new ArrayList<>(JSONController.importTeachersFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Teacher)));
-                DataBase.currentWeek = DataBase.Weeks.get(DataBase.Weeks.size()-1);
+                DataBase.currentWeek = DataBase.Weeks.get(0);
                 DataBaseOperation.CreateGroupsForView();
-                Log.println(Log.INFO,"One",API.URL_GET_LessonsByWeekId+DataBase.currentWeek.getIdweek());
-                Log.println(Log.INFO,"Two",RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId+DataBase.currentWeek.getIdweek()).toString());
-                DataBase.CurrentWeekLessons = new ArrayList<>(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId+DataBase.currentWeek.getIdweek()).toString()));
+                DataBase.CurrentWeekLessons = new ArrayList<>(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId + DataBase.currentWeek.getIdweek()).toString()));
+
             }
         });
-
-
+        return true;
     }
 }

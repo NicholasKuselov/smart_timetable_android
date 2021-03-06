@@ -88,7 +88,7 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView imageView;
-        final TextView itemName;
+       // final TextView itemName;
         final TextView itemTime;
         final LinearLayout item;
         ViewHolder(View view){
@@ -103,7 +103,7 @@ public class LessonListAdapter extends RecyclerView.Adapter<LessonListAdapter.Vi
 
             itemTime = (TextView)view.findViewById(R.id.tv_time);
             imageView = (ImageView)view.findViewById(R.id.image);
-            itemName = (TextView)view.findViewById(R.id.tv_itemName);
+           // itemName = (TextView)view.findViewById(R.id.tv_itemName);
             item = (LinearLayout)view.findViewById(R.id.item);
         }
 

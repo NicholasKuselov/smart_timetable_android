@@ -1,7 +1,24 @@
 package smarttimetable.main.Model.DBModels;
 
+import android.text.style.TtsSpan;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Week {
     int idweek;
+
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
+
     String dateFrom;
     String dateTo;
 
@@ -19,19 +36,39 @@ public class Week {
         this.idweek = idweek;
     }
 
-    public String getDateFrom() {
-        return dateFrom;
+    public Date getDateFrom1() {
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        try {
+            Date date = dateFormat.parse(dateFrom);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setDateFrom(String dateFrom) {
         this.dateFrom = dateFrom;
     }
 
-    public String getDateTo() {
-        return dateTo;
+    public Date getDateTo1() {
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        try {
+            Date date = dateFormat.parse(dateTo);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
+    }
+
+    @Override
+    public String toString()
+    {
+        return dateFrom+" - "+dateTo;
     }
 }

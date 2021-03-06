@@ -1,6 +1,5 @@
 package smarttimetable.main.windows;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -17,13 +16,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.ArrayList;
-
 import smarttimetable.main.JSONController;
-import smarttimetable.main.Model.DataBase;
+import smarttimetable.main.Model.CacheModels.Cache;
 import smarttimetable.main.Model.DataBaseOperation;
-import smarttimetable.main.Model.WebModel.API;
-import smarttimetable.main.Model.WebModel.RequestHandler;
 import smarttimetable.main.R;
 import smarttimetable.main.windows.homefragment.HomeFragment;
 
@@ -35,13 +30,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppBarConfiguration mAppBarConfiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //setTheme(R.style.DarkTheme);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        JSONController.testJson(this);
-
+        //JSONController.testJson(this);
         DataBaseOperation.ConnectToDb();
+        //if(!DataBaseOperation.ConnectToDb()) Cache.Read();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

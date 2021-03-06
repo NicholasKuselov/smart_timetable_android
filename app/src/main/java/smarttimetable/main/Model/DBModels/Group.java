@@ -26,4 +26,6 @@ public class Group {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }

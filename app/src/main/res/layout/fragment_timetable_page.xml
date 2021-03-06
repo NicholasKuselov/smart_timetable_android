@@ -1,17 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimetablePage">
+    tools:context=".TimetablePage"
+    android:background="@color/colorAccent1">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
 
-        android:id="@+id/testText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="36sp" />
 
-</FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/tv_FirstDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/firstDay"
+                android:textSize="36sp"
+       />
+
+            <ListView
+                android:id="@+id/rv_FirstDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+              />
+
+        <TextView
+            android:id="@+id/tv_SecondDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/secondDay"
+            android:textSize="36sp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_editor_absoluteY="112dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_conversion_absoluteWidth="141dp" />
+
+        <ListView
+            android:id="@+id/rv_SecondDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/tv_ThirdDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thirdDay"
+            android:textSize="36sp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_editor_absoluteY="225dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_conversion_absoluteWidth="104dp" />
+
+        <ListView
+            android:id="@+id/rv_ThirdDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             />
+
+        <TextView
+            android:id="@+id/tv_FourthDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fourthDay"
+            android:textSize="36sp"
+           />
+
+        <ListView
+            android:id="@+id/rv_FourthDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/tv_FifthDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/firstDay"
+            android:textSize="36sp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_editor_absoluteY="450dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_conversion_absoluteWidth="229dp" />
+
+        <ListView
+            android:id="@+id/rv_FifthDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           />
+
+        <TextView
+            android:id="@+id/tv_SixthDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sixthDay"
+            android:textSize="36sp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_editor_absoluteY="562dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_conversion_absoluteWidth="138dp" />
+
+        <ListView
+            android:id="@+id/rv_SixthDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+       />
+
+        </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

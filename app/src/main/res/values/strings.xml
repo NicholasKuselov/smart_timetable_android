@@ -18,4 +18,12 @@
 
     <!-- Home Fragment -->
     <string name="tv_TodayLessons">Заняти сегодня</string>
+
+    <!-- Days Fragment -->
+    <string name="firstDay">Понедельник</string>
+    <string name="secondDay">Вторник</string>
+    <string name="thirdDay">Среда</string>
+    <string name="fourthDay">Четверг</string>
+    <string name="fifthDay">Пятница</string>
+    <string name="sixthDay">Суббота</string>
 </resources>
