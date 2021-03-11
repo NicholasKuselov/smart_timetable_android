@@ -12,7 +12,8 @@ import smarttimetable.main.Model.DBModels.Teacher;
 import smarttimetable.main.Model.DBModels.Week;
 
 public class DataBase {
-    public static ArrayList<Lesson> CurrentWeekLessons = new ArrayList<Lesson>();
+   // public static ArrayList<Lesson> CurrentWeekLessons = new ArrayList<Lesson>();
+    public static ArrayList<Lesson> SelectedWeeksLessons = new ArrayList<>();
     public static ArrayList<Week> Weeks = new ArrayList<>();
     public static ArrayList<Teacher> Teachers = new ArrayList<>();
     public static ArrayList<Group> Groups = new ArrayList<>();

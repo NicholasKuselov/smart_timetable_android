@@ -1,14 +1,10 @@
-package smarttimetable.main;
+package smarttimetable.main.Model;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,30 +14,78 @@ import smarttimetable.main.Model.DBModels.Week;
 import smarttimetable.main.setting.SettingConst;
 
 public class JSONController {
+    public static String exportWeeksToJSON() {
 
-
-    public static boolean testJson(Context context) {
-        List<Week> dataList = new ArrayList<>();
-        dataList.add(new Week(0,"From","To"));
-        dataList.add(new Week(1,"From1","To1"));
-        dataList.add(new Week(2,"From2","To2"));
         Gson gson = new Gson();
         WeekDataItems dataItems = new WeekDataItems();
-        dataItems.setWeeks(dataList);
+        dataItems.setWeeks(DataBase.Weeks);
         String jsonString = gson.toJson(dataItems);
 
-        Log.println(Log.INFO,"ererererer",jsonString);
+        return jsonString;
+    }
 
+    public static String exportCoursesToJSON() {
 
+        Gson gson = new Gson();
+        CourseDataItems dataItems = new CourseDataItems();
+        dataItems.setCourses(DataBase.Courses);
+        String jsonString = gson.toJson(dataItems);
 
-        return false;
+        return jsonString;
+    }
+
+    public static String exportDaysToJSON() {
+
+        Gson gson = new Gson();
+        DayDataItems dataItems = new DayDataItems();
+        dataItems.setDays(DataBase.Days);
+        String jsonString = gson.toJson(dataItems);
+
+        return jsonString;
+    }
+
+    public static String exportGroupsToJSON() {
+
+        Gson gson = new Gson();
+        GroupDataItems dataItems = new GroupDataItems();
+        dataItems.setGroups(DataBase.Groups);
+        String jsonString = gson.toJson(dataItems);
+
+        return jsonString;
+    }
+
+    public static String exportLessonsToJSON() {
+
+        Gson gson = new Gson();
+        LessonDataItems dataItems = new LessonDataItems();
+        dataItems.setLessons(DataBase.SelectedWeeksLessons);
+        String jsonString = gson.toJson(dataItems);
+
+        return jsonString;
+    }
+
+    public static String exportSubjectsToJSON() {
+
+        Gson gson = new Gson();
+        SubjectDataItems dataItems = new SubjectDataItems();
+        dataItems.setSubjects(DataBase.Subjects);
+        String jsonString = gson.toJson(dataItems);
+
+        return jsonString;
+    }
+
+    public static String exportTeachersToJSON() {
+
+        Gson gson = new Gson();
+        TeacherDataItems dataItems = new TeacherDataItems();
+        dataItems.setTeachers(DataBase.Teachers);
+        String jsonString = gson.toJson(dataItems);
+
+        return jsonString;
     }
 
 
-
     public static List<Week> importWeeksFromJSON(String jsonString) {
-        //jsonString = "[" +jsonString.split("\\[")[1].split("\\]")[0] + "]";
-        Log.println(Log.INFO,"ssssssfgfgss",jsonString);
         try{
             Gson gson = new Gson();
             WeekDataItems dataItems = gson.fromJson(jsonString, WeekDataItems.class);
@@ -98,7 +142,7 @@ public class JSONController {
     public static List<Lesson> importLessonsFromJSON(String jsonString) {
 
         try{
-            Log.println(Log.INFO,"qqqqqqqqqqqq",jsonString);
+            debug.log("!!!!!!!!!!",jsonString);
             Gson gson = new Gson();
             LessonDataItems dataItems = gson.fromJson(jsonString, LessonDataItems.class);
             return  dataItems.getLessons();

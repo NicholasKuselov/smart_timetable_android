@@ -3,6 +3,7 @@ package smarttimetable.main.Model.WebModel;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +13,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URL;
+import java.util.ArrayList;
+
+import smarttimetable.main.Model.DataBase;
+import smarttimetable.main.Model.JSONController;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -19,6 +24,7 @@ public class RequestHandler {
     public static String sendGetRequest(String requestURL) {
         StringBuilder sb = new StringBuilder();
         try {
+
             URL url = new URL(requestURL);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

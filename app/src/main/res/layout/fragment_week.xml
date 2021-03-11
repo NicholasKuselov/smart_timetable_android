@@ -1,47 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_main"
-    tools:context=".fragments.TimetableFragment">
+    tools:context=".fragments.WeekFragment">
 
-    <Spinner
-        android:id="@+id/sp_Week"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toTopOf="@id/tab_layout"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/week_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/pager"
+        app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/sp_Week"
+        app:layout_constraintTop_toTopOf="parent"
         app:tabTextColor="@color/WhiteForeground"
         app:tabSelectedTextColor="#fff"
         app:tabMode="scrollable" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
+        android:id="@+id/week_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:overScrollMode="never"
-        android.R.id = "timetablePage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tab_layout" />/>
+        app:layout_constraintTop_toBottomOf="@id/week_tab_layout" />/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,18 @@
 package smarttimetable.main.windows;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.ListFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,28 +21,59 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import smarttimetable.main.JSONController;
 import smarttimetable.main.Model.CacheModels.Cache;
 import smarttimetable.main.Model.DataBaseOperation;
+import smarttimetable.main.Model.TimetableChangeNotifier;
 import smarttimetable.main.R;
-import smarttimetable.main.windows.homefragment.HomeFragment;
+import smarttimetable.main.fragments.AllLessonsFragment;
+import smarttimetable.main.fragments.HomeFragment;
+import smarttimetable.main.fragments.TimetableFragment;
+import smarttimetable.main.fragments.TimetablePage;
+import smarttimetable.main.fragments.UserLessonsFragment;
+import smarttimetable.main.fragments.WeekFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     //public ArrayList<Lesson> LessonsMas = new ArrayList<Lesson>();
 
+    public void onttt(View view)
+    {
+       // Toast.makeText(this,"sssss",Toast.LENGTH_LONG);
+        Log.println(Log.INFO,"Click","Clck");
+    }
+
+    Button b_NoConnetion;
 
     private AppBarConfiguration mAppBarConfiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //setTheme(R.style.DarkTheme);
         super.onCreate(savedInstanceState);
-
+        b_NoConnetion = (Button)findViewById(R.id.b_NoConnectionButton);
         setContentView(R.layout.activity_main);
 
         //JSONController.testJson(this);
+        Cache.context = this;
+
         DataBaseOperation.ConnectToDb();
-        //if(!DataBaseOperation.ConnectToDb()) Cache.Read();
+        ((Button)findViewById(R.id.b_NoConnectionButton)).setHeight(0);
+      /*
+        if(!DataBaseOperation.ConnectToDb())
+        {
+            b_NoConnetion.setHeight(40);
+            Cache.Read(this);
+        }
+        else {
+            ((Button)findViewById(R.id.b_NoConnectionButton)).setHeight(0);
+            TimetableChangeNotifier.Check();
+            DataBaseOperation.ConnectToDb();
+
+        }
+
+
+       */
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -107,14 +143,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    /*
-    private void ddd()
+    public void UpdateTimetable()
     {
-        String destFileName = "img.jpg";
-        String src = "https://img-fotki.yandex.ru/get/0/y230693.0/0_185_f52b55e3_M.jpg";
-        File dest = new File(Environment.getExternalStorageDirectory() + "/Download/" + destFileName);
-        new LoadFile(src, dest).start();
+        try {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, TimetableFragment.class.newInstance()).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
-    */
+
+
+
 
 }

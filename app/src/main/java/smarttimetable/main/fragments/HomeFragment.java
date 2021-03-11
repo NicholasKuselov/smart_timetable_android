@@ -1,4 +1,4 @@
-package smarttimetable.main.windows.homefragment;
+package smarttimetable.main.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

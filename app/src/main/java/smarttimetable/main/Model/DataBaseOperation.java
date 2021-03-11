@@ -3,11 +3,10 @@ package smarttimetable.main.Model;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import smarttimetable.main.JSONController;
+import smarttimetable.main.Model.CacheModels.Cache;
 import smarttimetable.main.Model.DBModels.*;
 import smarttimetable.main.Model.WebModel.API;
 import smarttimetable.main.Model.WebModel.RequestHandler;
@@ -87,14 +86,14 @@ public class DataBaseOperation {
         return null;
     }
 
-    public static ArrayList<Lesson> GetLessonByGroupAndCourse(GroupForView GroupAndCourse)
+    public static ArrayList<Lesson> GetLessonByGroupAndCourseAndWeek(GroupForView GroupAndCourse,Week week)
     {
         ArrayList<Lesson> tmp = new ArrayList<>();
-        for (int i = 0; i< DataBase.CurrentWeekLessons.size(); i++)
+        for (int i = 0; i< DataBase.SelectedWeeksLessons.size(); i++)
         {
-            if (DataBase.CurrentWeekLessons.get(i).getGroupId() == GroupAndCourse.group.getIdgroup() && DataBase.CurrentWeekLessons.get(i).getCourseId() == GroupAndCourse.course.getIdcourse())
+            if (DataBase.SelectedWeeksLessons.get(i).getGroupId() == GroupAndCourse.group.getIdgroup() && DataBase.SelectedWeeksLessons.get(i).getCourseId() == GroupAndCourse.course.getIdcourse() && DataBase.SelectedWeeksLessons.get(i).getWeekId() == week.getIdweek())
             {
-                tmp.add(DataBase.CurrentWeekLessons.get(i));
+                tmp.add(DataBase.SelectedWeeksLessons.get(i));
             }
         }
 
@@ -112,6 +111,7 @@ public class DataBaseOperation {
                 tmp.add(lessons.get(i));
             }
         }
+        debug.log("Lesson size",tmp.size());
         return tmp;
     }
 
@@ -128,7 +128,7 @@ public class DataBaseOperation {
 
     public static boolean ConnectToDb()
     {
-        //if(!RequestHandler.isOnline()) return false;
+        if(!RequestHandler.isOnline()) return false;
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -141,10 +141,27 @@ public class DataBaseOperation {
                 DataBase.Teachers = new ArrayList<>(JSONController.importTeachersFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Teacher)));
                 DataBase.currentWeek = DataBase.Weeks.get(0);
                 DataBaseOperation.CreateGroupsForView();
-                DataBase.CurrentWeekLessons = new ArrayList<>(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId + DataBase.currentWeek.getIdweek()).toString()));
+               // DataBase.CurrentWeekLessons = new ArrayList<>(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId + DataBase.currentWeek.getIdweek()).toString()));
+                DataBase.SelectedWeeksLessons.clear();
+                for (int i = 0; i < DataBase.Weeks.size();i++)
+                {
+                    DataBase.SelectedWeeksLessons.addAll(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId + DataBase.Weeks.get(i).getIdweek()).toString()));
+                }
 
+                Cache.Write();
             }
         });
         return true;
+    }
+
+    public static void SetCurrentWeek(Week week)
+    {
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+               // DataBase.CurrentWeekLessons = new ArrayList<>(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId + DataBase.currentWeek.getIdweek())));
+            }
+        });
     }
 }

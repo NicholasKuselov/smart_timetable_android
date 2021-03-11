@@ -1,4 +1,4 @@
-package smarttimetable.main.windows;
+package smarttimetable.main.Model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -24,6 +24,13 @@ public class LessonsListAdapter extends ArrayAdapter<Lesson> {
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
     }
+
+    public void update(List<Lesson> less)
+    {
+        lessons = less;
+        notifyDataSetChanged();
+    }
+
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view=inflater.inflate(this.layout, parent, false);
@@ -36,7 +43,7 @@ public class LessonsListAdapter extends ArrayAdapter<Lesson> {
 
         tv_subject.setText(DataBaseOperation.GetSubjectById(lesson.getSubjectId()).getName());
         tv_teacher.setText(DataBaseOperation.GetTeacherById(lesson.getTeacherId()).getName());
-        tv_time.setText(lesson.getTime());
+        tv_time.setText(lesson.getTime().replace("-"," "));
 
         return view;
     }
