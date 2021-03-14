@@ -71,4 +71,16 @@ public class Week {
     {
         return dateFrom+" - "+dateTo;
     }
+
+    @Override
+    public boolean equals(Object week)
+    {
+        Week c = (Week)week;
+        if (this.idweek == c.idweek && this.dateFrom.equals(c.dateFrom) && this.dateTo.equals(c.dateTo))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -24,4 +24,16 @@ public class Subject {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object subject)
+    {
+        Subject c = (Subject)subject;
+        if (this.idsubject == c.idsubject && this.name.equals(c.name))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -10,6 +10,7 @@ import smarttimetable.main.Model.CacheModels.Cache;
 import smarttimetable.main.Model.DBModels.*;
 import smarttimetable.main.Model.WebModel.API;
 import smarttimetable.main.Model.WebModel.RequestHandler;
+import smarttimetable.main.setting.Setting;
 
 
 public class DataBaseOperation {
@@ -86,6 +87,18 @@ public class DataBaseOperation {
         return null;
     }
 
+    public static Lesson GetLessonById(int id)
+    {
+        for (int i = 0; i < DataBase.SelectedWeeksLessons.size(); i++)
+        {
+            if (DataBase.SelectedWeeksLessons.get(i).getIdtimetable() == id)
+            {
+                return DataBase.SelectedWeeksLessons.get(i);
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<Lesson> GetLessonByGroupAndCourseAndWeek(GroupForView GroupAndCourse,Week week)
     {
         ArrayList<Lesson> tmp = new ArrayList<>();
@@ -100,6 +113,18 @@ public class DataBaseOperation {
         return tmp;
     }
 
+    public static ArrayList<Lesson> GetTodayLessonByUser()
+    {
+        ArrayList<Lesson> tmp = new ArrayList<>();
+        for (int i = 0; i< DataBase.SelectedWeeksLessons.size(); i++)
+        {
+            if (DataBase.SelectedWeeksLessons.get(i).getGroupId() == Setting.GetUserGroup() && DataBase.SelectedWeeksLessons.get(i).getCourseId() == Setting.GetUserCourse() && DataBase.SelectedWeeksLessons.get(i).getDate().equals(DateTimeOperation.GetCurrentDay())) {
+                tmp.add(DataBase.SelectedWeeksLessons.get(i));
+            }
+        }
+        return tmp;
+    }
+
     public static List<Lesson> GetLessonsByDay(ArrayList<Lesson> lessons, Day day)
     {
         List<Lesson> tmp = new ArrayList<>();
@@ -111,7 +136,6 @@ public class DataBaseOperation {
                 tmp.add(lessons.get(i));
             }
         }
-        debug.log("Lesson size",tmp.size());
         return tmp;
     }
 
@@ -148,7 +172,7 @@ public class DataBaseOperation {
                     DataBase.SelectedWeeksLessons.addAll(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId + DataBase.Weeks.get(i).getIdweek()).toString()));
                 }
 
-                Cache.Write();
+                //Cache.Write();
             }
         });
         return true;

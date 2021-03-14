@@ -142,7 +142,6 @@ public class JSONController {
     public static List<Lesson> importLessonsFromJSON(String jsonString) {
 
         try{
-            debug.log("!!!!!!!!!!",jsonString);
             Gson gson = new Gson();
             LessonDataItems dataItems = gson.fromJson(jsonString, LessonDataItems.class);
             return  dataItems.getLessons();

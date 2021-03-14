@@ -24,7 +24,6 @@ public class FileController {
 
             int c;
             while((c = streamReader.read())!=-1){
-                Log.println(Log.INFO,"kpkpkpkpkp",String.valueOf((char)c));
                 result = result + (char)c;
             }
 
@@ -34,7 +33,6 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.println(Log.INFO,"kpkpkpkpkp",result);
         return result;
     }
 
@@ -42,7 +40,6 @@ public class FileController {
 
     public static boolean WriteFile(Context context,String FilePath, String Content)
     {
-        Log.println(Log.INFO,"WRITEFILE",Content);
         FileOutputStream fileOutputStream = null;
 
         try {

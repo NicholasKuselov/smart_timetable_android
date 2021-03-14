@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary1</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:buttonStyle">@style/MyCustomButton</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -17,15 +17,6 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="DarkTheme" parent="Theme.AppCompat" >
-        <item name="colorPrimary">@color/colorPrimary1</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark1</item>
-        <item name="colorAccent">@color/colorAccent1</item>
-    </style>
 
-    <style name="MyCustomButton" parent="android:Widget.Button">
-        <item name="android:background">#005dfc</item>
-        <item name="android:backgroundStacked">#f50511</item>
-    </style>
 
 </resources>

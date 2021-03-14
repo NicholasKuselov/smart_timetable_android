@@ -1,6 +1,10 @@
 package smarttimetable.main.windows;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +13,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,8 +27,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.ArrayList;
+
 import smarttimetable.main.Model.CacheModels.Cache;
+import smarttimetable.main.Model.DBModels.DataBaseConnector;
 import smarttimetable.main.Model.DataBaseOperation;
+import smarttimetable.main.Model.FragmentNotifier;
+import smarttimetable.main.Model.debug;
+import smarttimetable.main.setting.*;
 import smarttimetable.main.Model.TimetableChangeNotifier;
 import smarttimetable.main.R;
 import smarttimetable.main.fragments.AllLessonsFragment;
@@ -32,13 +44,22 @@ import smarttimetable.main.fragments.TimetablePage;
 import smarttimetable.main.fragments.UserLessonsFragment;
 import smarttimetable.main.fragments.WeekFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    //public ArrayList<Lesson> LessonsMas = new ArrayList<Lesson>();
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , DataBaseConnector.DataBaseConnectorListener {
+
+
+    private ArrayList<String> ChangeLog;
+
+    private FragmentNotifier CurrentFragment;
+
+    private HomeFragment fg_home;
+    private TimetableFragment fg_timetable;
+    private AllLessonsFragment fg_allLessons;
+    private UserLessonsFragment fg_UserLessons;
 
     public void onttt(View view)
     {
-       // Toast.makeText(this,"sssss",Toast.LENGTH_LONG);
+
         Log.println(Log.INFO,"Click","Clck");
     }
 
@@ -47,31 +68,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppBarConfiguration mAppBarConfiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //setTheme(R.style.DarkTheme);
+
         super.onCreate(savedInstanceState);
-        b_NoConnetion = (Button)findViewById(R.id.b_NoConnectionButton);
         setContentView(R.layout.activity_main);
 
-        //JSONController.testJson(this);
+        b_NoConnetion = (Button)findViewById(R.id.b_NoConnectionButton);
+        b_NoConnetion.setVisibility(View.GONE);
+
+        Setting.CreateSetting(this);
+        Setting.SetUser(3,5); //ipz 1
         Cache.context = this;
 
-        DataBaseOperation.ConnectToDb();
-        ((Button)findViewById(R.id.b_NoConnectionButton)).setHeight(0);
-      /*
-        if(!DataBaseOperation.ConnectToDb())
-        {
-            b_NoConnetion.setHeight(40);
-            Cache.Read(this);
-        }
-        else {
-            ((Button)findViewById(R.id.b_NoConnectionButton)).setHeight(0);
-            TimetableChangeNotifier.Check();
-            DataBaseOperation.ConnectToDb();
+        CreateFragments();
 
-        }
-
-
-       */
+        DataBaseConnector dataBaseConnector = new DataBaseConnector(this);
+        dataBaseConnector.execute();
 
 
 
@@ -89,6 +100,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        try {
+            HomeFragment tmp = HomeFragment.class.newInstance();
+            CurrentFragment = tmp;
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, tmp).commit();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Override
+    public void OnConnected(Void someResult)
+    {
+        ChangeLog = TimetableChangeNotifier.Check();
+        if (ChangeLog.size()>0)
+        {
+            String aaa = "";
+            for (int i = 0; i < ChangeLog.size() ; i++) {
+                aaa = aaa + ChangeLog.get(i) + "\n";
+            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage(aaa).setTitle(R.string.ChangeDialogTitle);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            CurrentFragment.Notify();
+        }
     }
 
 
@@ -100,27 +145,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         int id = item.getItemId();
-
-        switch (id)
-        {
-            case R.id.nav_timetable:
-                fragmentClass = TimetableFragment.class;
-                break;
-            case R.id.nav_home:
-                fragmentClass = HomeFragment.class;
-                break;
-            case R.id.nav_all_lessons:
-                fragmentClass = AllLessonsFragment.class;
-                break;
-            case R.id.nav_user_lessons:
-                fragmentClass = UserLessonsFragment.class;
-                break;
-        }
-
         try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            switch (id) {
+                case R.id.nav_timetable:
+                    TimetableFragment tmp = TimetableFragment.class.newInstance();
+                    CurrentFragment = tmp;
+                    fragment = tmp;
+                    break;
+                case R.id.nav_home:
+                    HomeFragment tmp1 = HomeFragment.class.newInstance();
+                    CurrentFragment = tmp1;
+                    fragment = tmp1;
+                    break;
+                case R.id.nav_all_lessons:
+                    AllLessonsFragment tmp2 = AllLessonsFragment.class.newInstance();
+                    CurrentFragment = tmp2;
+                    fragment = tmp2;
+                    break;
+                case R.id.nav_user_lessons:
+                    UserLessonsFragment tmp3 = UserLessonsFragment.class.newInstance();
+                    CurrentFragment = tmp3;
+                    fragment = tmp3;
+                    break;
+            }
+        }catch (Exception e){
+
         }
 
         // Вставляем фрагмент, заменяя текущий фрагмент
@@ -143,18 +193,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public void UpdateTimetable()
+    private void CreateFragments()
     {
         try {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, TimetableFragment.class.newInstance()).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
+            fg_allLessons = AllLessonsFragment.class.newInstance();
+            fg_home = HomeFragment.class.newInstance();
+            fg_timetable = TimetableFragment.class.newInstance();
+            fg_UserLessons = UserLessonsFragment.class.newInstance();
+        }catch (Exception e)
+        {
+
         }
-
     }
-
-
 
 
 }

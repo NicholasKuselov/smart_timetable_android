@@ -4,18 +4,24 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="colorPrimary1">#555</color>
-    <color name="colorPrimaryDark1">#666</color>
-    <color name="colorAccent1">#999</color>
+
 
     <color name="colorMain">#03DAC5</color>
 
-    <color name="mainBackgroundStart">#292931</color>
-    <color name="mainBackgroundEnd">#212729</color>
+    <color name="mainBackgroundStart">#051d40</color>
+    <color name="mainBackgroundEnd">#001a41</color>
 
     <color name="LessonItemBackground">#303539</color>
-    <color name="WhiteForeground">#d6d6d6</color>
+    <color name="WhiteForeground">#eff0f2</color>
+
+    <!-- LessonItem -->
+    <color name="LessonListItemTextColorMain">#fdfdfe</color>
+    <color name="LessonListItemTextColorSecondary">#717f94</color>
+    <color name="LessonListDivider">#1e324e</color>
 
 
+
+    <color name="NavViewBackground">#182a4d</color>
+    <color name="HeaderBackground">#192a3f</color>
 
 </resources>

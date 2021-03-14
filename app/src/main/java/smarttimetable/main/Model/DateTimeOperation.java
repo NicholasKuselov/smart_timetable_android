@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class DateTimeOperation
 {
-    public int GetCurrentWeekId()
+    public static int GetCurrentWeekId()
     {
         Date currentDate = new Date();
         //DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
@@ -23,9 +23,16 @@ public class DateTimeOperation
             }
         }
 
+        return -1;
+    }
 
-
-        return DataBase.Weeks.get(DataBase.Weeks.size()-1).getIdweek();
+    public static String GetCurrentDay()
+    {
+        Date currentDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        String dateText = dateFormat.format(currentDate);
+        debug.log("currentdate",dateText);
+        return "22.02.2021";
     }
 
     public static String GetDayAfter(int DayAfterCount,String dateString)

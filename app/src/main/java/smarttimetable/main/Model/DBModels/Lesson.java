@@ -2,6 +2,10 @@ package smarttimetable.main.Model.DBModels;
 
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
+import smarttimetable.main.Model.DataBaseOperation;
+
 public class Lesson {
     int idtimetable;
     int Subject;
@@ -95,5 +99,22 @@ public class Lesson {
 
     public void setTime(String time) {
         Time = time;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Lesson c = (Lesson)obj;
+        if (this.idtimetable == c.idtimetable && this.Subject == c.Subject && this.Day == c.Day&& this.Week == c.Week && this.Teacher == c.Teacher && this.Group == c.Group && this.Course == c.Course && this.Date.equals(c.Date) && this.Time.equals(c.Time))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+        return getDate()+" "+getTime()+" "+ DataBaseOperation.GetGroupById(getGroupId())+" "+DataBaseOperation.GetCourseById(getCourseId());
     }
 }

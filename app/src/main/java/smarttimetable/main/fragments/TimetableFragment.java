@@ -22,7 +22,9 @@ import android.widget.TextView;
 import smarttimetable.main.Model.DBModels.Week;
 import smarttimetable.main.Model.DataBase;
 import smarttimetable.main.Model.DataBaseOperation;
+import smarttimetable.main.Model.FragmentNotifier;
 import smarttimetable.main.Model.TimetableFragmentsAdapter;
+import smarttimetable.main.Model.debug;
 import smarttimetable.main.R;
 import smarttimetable.main.windows.MainActivity;
 
@@ -31,11 +33,25 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
-public class TimetableFragment extends Fragment {
+public class TimetableFragment extends Fragment implements FragmentNotifier {
+    @Override
+    public void Notify() {
+        debug.log("Notify Work","TimetableFragment");
+        TabLayoutMediator tabLayoutMediator= new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy(){
+
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText(DataBase.GroupsForView.get(position).GetAbbreviation());
+            }
+        });
+        tabLayoutMediator.attach();
+        Update();
+    }
 
     ArrayAdapter<Week> adapter;
     ViewPager2 pager;
     TimetableFragmentsAdapter pageAdapter;
+    TabLayout tabLayout;
 
     public TimetableFragment() {
         // Required empty public constructor
@@ -61,7 +77,7 @@ public class TimetableFragment extends Fragment {
 
 
 
-        final TabLayout tabLayout = root.findViewById(R.id.tab_layout);
+        tabLayout = root.findViewById(R.id.tab_layout);
         TabLayoutMediator tabLayoutMediator= new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy(){
 
             @Override
@@ -76,10 +92,10 @@ public class TimetableFragment extends Fragment {
         AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    DataBase.currentWeek = DataBase.Weeks.get(position);
-                    DataBaseOperation.SetCurrentWeek(DataBase.Weeks.get(position));
-                    //ttt();
-                    fff();
+                DataBase.currentWeek = DataBase.Weeks.get(position);
+                DataBaseOperation.SetCurrentWeek(DataBase.Weeks.get(position));
+
+                Update();
 
 
             }
@@ -94,12 +110,8 @@ public class TimetableFragment extends Fragment {
         return root;
     }
 
-    private void ttt()
-    {
-        ((MainActivity)this.getActivity()).UpdateTimetable();
-    }
 
-    void fff()
+    void Update()
     {
         //pageAdapter.uu();
 

@@ -24,4 +24,16 @@ public class Course {
     public void setNumber(int number) {
         this.number = number;
     }
+
+    @Override
+    public boolean equals(Object course)
+    {
+        Course c = (Course)course;
+        if (this.idcourse == c.idcourse && this.number == c.number)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

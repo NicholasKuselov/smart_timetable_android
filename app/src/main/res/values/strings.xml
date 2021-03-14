@@ -26,4 +26,12 @@
     <string name="fourthDay">Четверг</string>
     <string name="fifthDay">Пятница</string>
     <string name="sixthDay">Суббота</string>
+
+    <!-- ChangeDialog -->
+    <string name="ChangeDialogTitle">Пока вас небыло, кое-что поменялось...</string>
+
+    <!-- LessonItem -->
+    <string name="LessonStart">Начало</string>
+    <string name="LessonEnd">Конец</string>
+
 </resources>

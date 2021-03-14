@@ -9,11 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import smarttimetable.main.Model.FragmentNotifier;
 import smarttimetable.main.R;
 
 
-public class UserLessonsFragment extends Fragment {
+public class UserLessonsFragment extends Fragment implements FragmentNotifier {
 
+    @Override
+    public void Notify() {
+
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

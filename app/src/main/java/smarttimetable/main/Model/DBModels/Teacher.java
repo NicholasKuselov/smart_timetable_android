@@ -34,4 +34,16 @@ public class Teacher {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
+    @Override
+    public boolean equals(Object teacher)
+    {
+        Teacher t = (Teacher)teacher;
+        if (this.idTeacher == t.idTeacher && this.mail.equals(t.mail) && this.name.equals(t.name))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
