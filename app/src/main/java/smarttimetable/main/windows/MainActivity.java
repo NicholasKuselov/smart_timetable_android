@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             AlertDialog dialog = builder.create();
             dialog.show();
             CurrentFragment.Notify();
+            Cache.Write();
         }
     }
 
@@ -141,8 +142,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment = null;
-        Class fragmentClass = null;
-
 
         int id = item.getItemId();
         try {

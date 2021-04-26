@@ -29,7 +29,6 @@ public class TimetablePage extends Fragment {
 
     private GroupForView groupForView;
 
-    private ArrayList<Lesson> lessons = new ArrayList<>();
     private int pageNumber;
 
     ListView lv_firstDay;
@@ -59,21 +58,9 @@ public class TimetablePage extends Fragment {
         super.onCreate(savedInstanceState);
         pageNumber = getArguments() != null ? getArguments().getInt("num") : 1;
         groupForView = DataBase.GroupsForView.get(pageNumber);
-        GetLessons();
+
     }
 
-    /*
-    public void setSelectedItem() {
-        //Toast.makeText(this.getActivity(),"yesssss",Toast.LENGTH_LONG);
-        FirstDayLessonsListAdapter.update(DataBaseOperation.GetLessonsByDay(DataBaseOperation.GetLessonByGroupAndCourse(groupForView),DataBase.Days.get(0)));
-        SecondDayLessonsListAdapter.update(DataBaseOperation.GetLessonsByDay(DataBaseOperation.GetLessonByGroupAndCourse(groupForView),DataBase.Days.get(1)));
-        ThirdDayLessonsListAdapter.update(DataBaseOperation.GetLessonsByDay(DataBaseOperation.GetLessonByGroupAndCourse(groupForView),DataBase.Days.get(2)));
-        FourthDayLessonsListAdapter.update(DataBaseOperation.GetLessonsByDay(DataBaseOperation.GetLessonByGroupAndCourse(groupForView),DataBase.Days.get(3)));
-        FifthDayLessonsListAdapter.update(DataBaseOperation.GetLessonsByDay(DataBaseOperation.GetLessonByGroupAndCourse(groupForView),DataBase.Days.get(4)));
-        SixthDayLessonsListAdapter.update(DataBaseOperation.GetLessonsByDay(DataBaseOperation.GetLessonByGroupAndCourse(groupForView),DataBase.Days.get(5)));
-    }
-
-     */
 
     LessonsListAdapter FirstDayLessonsListAdapter;
     LessonsListAdapter SecondDayLessonsListAdapter;
@@ -125,7 +112,6 @@ public class TimetablePage extends Fragment {
         lv_fifthDay.setAdapter(FifthDayLessonsListAdapter);
         lv_sixthDay.setAdapter(SixthDayLessonsListAdapter);
 
-        debug.log("adapter count",lv_firstDay.getAdapter().getCount());
 
         tv_FirstDay.setText(tv_FirstDay.getText()+" "+ DateTimeOperation.GetDayAfter(0,DataBase.currentWeek.getDateFrom()));
         tv_SecondDay.setText(tv_SecondDay.getText()+" "+ DateTimeOperation.GetDayAfter(1,DataBase.currentWeek.getDateFrom()));
@@ -137,21 +123,4 @@ public class TimetablePage extends Fragment {
         return result;
     }
 
-    private void GetLessons()
-    {
-        /*
-        for (int i = 0;i<DataBase.CurrentWeekLessons.size();i++)
-        {
-            //Log.println(Log.INFO,"gggggggggggggggggggggg",String.valueOf(DataBase.CurrentWeekLessons.get(i).getCourseId())+" == "+String.valueOf(groupForView.course.getIdcourse()));
-            if (DataBase.CurrentWeekLessons.get(i).getCourseId() == groupForView.course.getIdcourse() && DataBase.CurrentWeekLessons.get(i).getGroupId() == groupForView.group.getIdgroup())
-            {
-                lessons.add(DataBase.CurrentWeekLessons.get(i));
-            }
-        }
-
-
-         */
-
-
-    }
 }

@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class DateTimeOperation
 {
-    public static int GetCurrentWeekId()
+    public static int GetCurrentWeekPos()
     {
         Date currentDate = new Date();
         //DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
@@ -19,11 +19,13 @@ public class DateTimeOperation
         {
             if (currentDate.after(DataBase.Weeks.get(i).getDateFrom1()) && currentDate.before(DataBase.Weeks.get(i).getDateTo1()))
             {
-                return DataBase.Weeks.get(i).getIdweek();
+                return i;
             }
         }
 
-        return -1;
+        if (DataBase.Weeks.size()==0)
+            return -1;
+        return DataBase.Weeks.size()-1;
     }
 
     public static String GetCurrentDay()

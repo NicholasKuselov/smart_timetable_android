@@ -22,6 +22,7 @@ import android.widget.TextView;
 import smarttimetable.main.Model.DBModels.Week;
 import smarttimetable.main.Model.DataBase;
 import smarttimetable.main.Model.DataBaseOperation;
+import smarttimetable.main.Model.DateTimeOperation;
 import smarttimetable.main.Model.FragmentNotifier;
 import smarttimetable.main.Model.TimetableFragmentsAdapter;
 import smarttimetable.main.Model.debug;
@@ -87,6 +88,8 @@ public class TimetableFragment extends Fragment implements FragmentNotifier {
         });
         tabLayoutMediator.attach();
 
+        int currentWeekPos = DateTimeOperation.GetCurrentWeekPos();
+        if (currentWeekPos!=-1) spinner.setSelection(currentWeekPos);
         //spinner.setSelection();
 
         AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {

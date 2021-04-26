@@ -23,7 +23,7 @@ import smarttimetable.main.Model.debug;
 import smarttimetable.main.R;
 
 
-public class HomeFragment extends Fragment implements DataBaseConnector.DataBaseConnectorListener, FragmentNotifier  {
+public class HomeFragment extends Fragment implements FragmentNotifier  {
 
     ListView lv_TodayLessons;
     LessonsListAdapter lessonsListAdapter;
@@ -33,9 +33,7 @@ public class HomeFragment extends Fragment implements DataBaseConnector.DataBase
         View result = inflater.inflate(R.layout.fragment_home, container, false);
 
         lv_TodayLessons = (ListView)result.findViewById(R.id.lv_LessonsToday);
-
         lessonsListAdapter = new LessonsListAdapter(this.getActivity(), R.layout.lessons_list_item, DataBaseOperation.GetTodayLessonByUser());
-
         lv_TodayLessons.setAdapter(lessonsListAdapter);
 
         return result;
@@ -43,16 +41,11 @@ public class HomeFragment extends Fragment implements DataBaseConnector.DataBase
 
     @Override
     public void Notify() {
-        debug.log("Notify Work","HomeFragment");
+        lessonsListAdapter = new LessonsListAdapter(this.getActivity(), R.layout.lessons_list_item, DataBaseOperation.GetTodayLessonByUser());
+        lv_TodayLessons.setAdapter(lessonsListAdapter);
     }
 
-    @Override
-    public void OnConnected(Void someResult) {
-        debug.log("ffffffffff","yessssssssss");
-        //lessonsListAdapter = new LessonsListAdapter(this.getActivity(), R.layout.lessons_list_item, DataBaseOperation.GetTodayLessonByUser());
 
-       // lv_TodayLessons.setAdapter(lessonsListAdapter);
-    }
 
 
 }
