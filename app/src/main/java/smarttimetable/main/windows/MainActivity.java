@@ -157,11 +157,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     CurrentFragment = tmp1;
                     fragment = tmp1;
                     break;
+                    /*
                 case R.id.nav_all_lessons:
                     AllLessonsFragment tmp2 = AllLessonsFragment.class.newInstance();
                     CurrentFragment = tmp2;
                     fragment = tmp2;
                     break;
+
+                     */
                 case R.id.nav_user_lessons:
                     UserLessonsFragment tmp3 = UserLessonsFragment.class.newInstance();
                     CurrentFragment = tmp3;

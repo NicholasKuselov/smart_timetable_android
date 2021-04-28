@@ -2,36 +2,36 @@
     <string name="app_name">SmartTimetable</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Розклад занять</string>
+    <string name="nav_header_subtitle">ЛНУ ім. Тараса Шевченка</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <!-- Main Drewer -->
-    <string name="menu_home">Главная</string>
-    <string name="menu_all_lessons">Занятия</string>
-    <string name="menu_user_lessons">Ваши занятия</string>
-    <string name="menu_setting">Настройки</string>
-    <string name="menu_timetable">Расписание</string>
+    <string name="menu_home">Головна</string>
+    <string name="menu_all_lessons">Заняття</string>
+    <string name="menu_user_lessons">Ваші заняття</string>
+    <string name="menu_setting">Налаштування</string>
+    <string name="menu_timetable">Розклад</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!-- Home Fragment -->
-    <string name="tv_TodayLessons">Заняти сегодня</string>
+    <string name="tv_TodayLessons">Заняття сьогодні</string>
 
     <!-- Days Fragment -->
-    <string name="firstDay">Понедельник</string>
-    <string name="secondDay">Вторник</string>
-    <string name="thirdDay">Среда</string>
-    <string name="fourthDay">Четверг</string>
-    <string name="fifthDay">Пятница</string>
-    <string name="sixthDay">Суббота</string>
+    <string name="firstDay">Понеділок</string>
+    <string name="secondDay">Вівторок</string>
+    <string name="thirdDay">Середа</string>
+    <string name="fourthDay">Четвер</string>
+    <string name="fifthDay">Пятниця</string>
+    <string name="sixthDay">Субота</string>
 
     <!-- ChangeDialog -->
-    <string name="ChangeDialogTitle">Пока вас небыло, кое-что поменялось...</string>
+    <string name="ChangeDialogTitle">Доки вас не було, дещо змінилось...</string>
 
     <!-- LessonItem -->
-    <string name="LessonStart">Начало</string>
-    <string name="LessonEnd">Конец</string>
+    <string name="LessonStart">Початок</string>
+    <string name="LessonEnd">Кінець</string>
 
 </resources>
