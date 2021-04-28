@@ -10,7 +10,7 @@ import smarttimetable.main.Model.JSONController;
 import smarttimetable.main.Model.WebModel.API;
 import smarttimetable.main.Model.WebModel.RequestHandler;
 
-public class DataBaseConnector extends AsyncTask<Void, Void, Void> {
+public class DataBaseConnector extends AsyncTask<Void,Void , DataBaseConnector.ConnectionResult> {
 
     private DataBaseConnectorListener callback;
 
@@ -19,7 +19,11 @@ public class DataBaseConnector extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... arg0) {
+    protected DataBaseConnector.ConnectionResult doInBackground(Void... arg0) {
+        if(!RequestHandler.isOnline())
+        {
+            return ConnectionResult.NoConnection;
+        }
         DataBase.Weeks = new ArrayList<>(JSONController.importWeeksFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Weeks)));
         DataBase.Days = new ArrayList<>(JSONController.importDaysFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Days)));
         DataBase.Groups = new ArrayList<>(JSONController.importGroupsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_Groups)));
@@ -35,17 +39,25 @@ public class DataBaseConnector extends AsyncTask<Void, Void, Void> {
             DataBase.SelectedWeeksLessons.addAll(JSONController.importLessonsFromJSON(RequestHandler.sendGetRequest(API.URL_GET_LessonsByWeekId + DataBase.Weeks.get(i).getIdweek()).toString()));
         }
 
-        return null;
+        return ConnectionResult.Success;
     }
 
     @Override
-    protected void onPostExecute(Void result) {
+    protected void onPostExecute(ConnectionResult result) {
         if(callback!=null)
             callback.OnConnected(result);
     }
 
     public interface DataBaseConnectorListener
     {
-        public void OnConnected(Void someResult);
+        public void OnConnected(ConnectionResult someResult);
     }
+
+    public enum ConnectionResult
+    {
+        NoConnection,
+        Error,
+        Success
+
+    };
 }

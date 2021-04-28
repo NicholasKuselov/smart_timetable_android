@@ -57,11 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AllLessonsFragment fg_allLessons;
     private UserLessonsFragment fg_UserLessons;
 
-    public void onttt(View view)
-    {
-
-        Log.println(Log.INFO,"Click","Clck");
-    }
+    Toolbar toolbar;
 
     Button b_NoConnetion;
 
@@ -81,12 +77,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         CreateFragments();
 
-        DataBaseConnector dataBaseConnector = new DataBaseConnector(this);
-        dataBaseConnector.execute();
+
+        Connect();
 
 
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -117,26 +112,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public void OnConnected(Void someResult)
+    public void OnConnected(DataBaseConnector.ConnectionResult connectionResult)
     {
-        ChangeLog = TimetableChangeNotifier.Check();
-        if (ChangeLog.size()>0)
+        switch (connectionResult)
         {
-            String aaa = "";
-            for (int i = 0; i < ChangeLog.size() ; i++) {
-                aaa = aaa + ChangeLog.get(i) + "\n";
-            }
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            case NoConnection:
+                b_NoConnetion.setVisibility(View.VISIBLE);
+                break;
 
-            builder.setMessage(aaa).setTitle(R.string.ChangeDialogTitle);
+            case Success:
+                b_NoConnetion.setVisibility(View.GONE);
+                ChangeLog = TimetableChangeNotifier.Check();
+                if (ChangeLog.size()>0)
+                {
+                    String aaa = "";
+                    for (int i = 0; i < ChangeLog.size() ; i++) {
+                        aaa = aaa + ChangeLog.get(i) + "\n";
+                    }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            CurrentFragment.Notify();
-            Cache.Write();
+                    builder.setMessage(aaa).setTitle(R.string.ChangeDialogTitle);
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    CurrentFragment.Notify();
+                    Cache.Write();
+                }
+                break;
+
+            case Error:
+                break;
         }
+
     }
 
+    public void OnConnectButtonClick(View v)
+    {
+        Connect();
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -170,6 +183,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     CurrentFragment = tmp3;
                     fragment = tmp3;
                     break;
+
+                    
             }
         }catch (Exception e){
 
@@ -181,7 +196,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Выделяем выбранный пункт меню в шторке
         item.setChecked(true);
         // Выводим выбранный пункт в заголовке
-        setTitle(item.getTitle());
+
+        toolbar.setTitle(item.getTitle());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -208,5 +224,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private void Connect()
+    {
+        DataBaseConnector dataBaseConnector = new DataBaseConnector(this);
+        dataBaseConnector.execute();
+    }
 
 }

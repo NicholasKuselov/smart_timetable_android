@@ -39,7 +39,8 @@ public class RequestHandler {
         return sb.toString();
     }
 
-    public static boolean isOnline() {
+    public static boolean isOnline()
+    {
         return true;
     }
 }

@@ -22,8 +22,9 @@
             android:id="@+id/b_NoConnectionButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:onClick="onttt"
-            android:text="test"
+            android:onClick="OnConnectButtonClick"
+            android:background="@color/bNoConnectionBackground"
+            android:text="@string/bNoConnection"
             android:visibility="visible"
          />
 

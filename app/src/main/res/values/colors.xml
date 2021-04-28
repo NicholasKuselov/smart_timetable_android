@@ -8,6 +8,8 @@
 
     <color name="colorMain">#03DAC5</color>
 
+    <color name="bNoConnectionBackground">#f71f07</color>
+
     <color name="mainBackgroundStart">#051d40</color>
     <color name="mainBackgroundEnd">#001a41</color>
 
