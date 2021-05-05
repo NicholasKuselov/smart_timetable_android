@@ -9,22 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import smarttimetable.main.Model.FragmentNotifier;
-import smarttimetable.main.Model.debug;
+import smarttimetable.main.Model.IFragmentNotifier;
 import smarttimetable.main.R;
 
 
-public class AllLessonsFragment extends Fragment implements FragmentNotifier {
+public class UserLessonsIFragment extends Fragment implements IFragmentNotifier {
+
     @Override
     public void Notify() {
-        debug.log("Notify Work","AllLessonsFragment");
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_all_lessons, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+        View root = inflater.inflate(R.layout.fragment_user_lessons, container, false);
+        final TextView textView = root.findViewById(R.id.text_slideshow);
 
         return root;
     }

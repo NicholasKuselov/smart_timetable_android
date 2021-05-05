@@ -1,24 +1,16 @@
 package smarttimetable.main.windows;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.ListFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -31,18 +23,15 @@ import java.util.ArrayList;
 
 import smarttimetable.main.Model.CacheModels.Cache;
 import smarttimetable.main.Model.DBModels.DataBaseConnector;
-import smarttimetable.main.Model.DataBaseOperation;
-import smarttimetable.main.Model.FragmentNotifier;
-import smarttimetable.main.Model.debug;
+import smarttimetable.main.Model.IFragmentNotifier;
+import smarttimetable.main.fragments.SettingsFragment;
 import smarttimetable.main.setting.*;
 import smarttimetable.main.Model.TimetableChangeNotifier;
 import smarttimetable.main.R;
-import smarttimetable.main.fragments.AllLessonsFragment;
-import smarttimetable.main.fragments.HomeFragment;
-import smarttimetable.main.fragments.TimetableFragment;
-import smarttimetable.main.fragments.TimetablePage;
-import smarttimetable.main.fragments.UserLessonsFragment;
-import smarttimetable.main.fragments.WeekFragment;
+import smarttimetable.main.fragments.AllLessonsIFragment;
+import smarttimetable.main.fragments.HomeIFragment;
+import smarttimetable.main.fragments.TimetableIFragment;
+import smarttimetable.main.fragments.UserLessonsIFragment;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , DataBaseConnector.DataBaseConnectorListener {
@@ -50,12 +39,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ArrayList<String> ChangeLog;
 
-    private FragmentNotifier CurrentFragment;
+    private IFragmentNotifier CurrentFragment;
 
-    private HomeFragment fg_home;
-    private TimetableFragment fg_timetable;
-    private AllLessonsFragment fg_allLessons;
-    private UserLessonsFragment fg_UserLessons;
+    private HomeIFragment fg_home;
+    private TimetableIFragment fg_timetable;
+    private AllLessonsIFragment fg_allLessons;
+    private UserLessonsIFragment fg_UserLessons;
 
     Toolbar toolbar;
 
@@ -98,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         try {
-            HomeFragment tmp = HomeFragment.class.newInstance();
+            HomeIFragment tmp = HomeIFragment.class.newInstance();
             CurrentFragment = tmp;
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, tmp).commit();
@@ -161,12 +150,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             switch (id) {
                 case R.id.nav_timetable:
-                    TimetableFragment tmp = TimetableFragment.class.newInstance();
+                    TimetableIFragment tmp = TimetableIFragment.class.newInstance();
                     CurrentFragment = tmp;
                     fragment = tmp;
                     break;
                 case R.id.nav_home:
-                    HomeFragment tmp1 = HomeFragment.class.newInstance();
+                    HomeIFragment tmp1 = HomeIFragment.class.newInstance();
                     CurrentFragment = tmp1;
                     fragment = tmp1;
                     break;
@@ -179,12 +168,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                      */
                 case R.id.nav_user_lessons:
-                    UserLessonsFragment tmp3 = UserLessonsFragment.class.newInstance();
+                    UserLessonsIFragment tmp3 = UserLessonsIFragment.class.newInstance();
                     CurrentFragment = tmp3;
                     fragment = tmp3;
                     break;
 
-                    
+                case R.id.nav_setting:
+                    SettingsFragment tmp4 = SettingsFragment.class.newInstance();
+                    CurrentFragment = tmp4;
+                    fragment = tmp4;
+                    break;
+
             }
         }catch (Exception e){
 
@@ -214,10 +208,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void CreateFragments()
     {
         try {
-            fg_allLessons = AllLessonsFragment.class.newInstance();
-            fg_home = HomeFragment.class.newInstance();
-            fg_timetable = TimetableFragment.class.newInstance();
-            fg_UserLessons = UserLessonsFragment.class.newInstance();
+            fg_allLessons = AllLessonsIFragment.class.newInstance();
+            fg_home = HomeIFragment.class.newInstance();
+            fg_timetable = TimetableIFragment.class.newInstance();
+            fg_UserLessons = UserLessonsIFragment.class.newInstance();
         }catch (Exception e)
         {
 

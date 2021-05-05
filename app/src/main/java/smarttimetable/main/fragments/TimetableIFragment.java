@@ -1,40 +1,33 @@
 package smarttimetable.main.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import smarttimetable.main.Model.DBModels.Week;
 import smarttimetable.main.Model.DataBase;
 import smarttimetable.main.Model.DataBaseOperation;
 import smarttimetable.main.Model.DateTimeOperation;
-import smarttimetable.main.Model.FragmentNotifier;
+import smarttimetable.main.Model.IFragmentNotifier;
 import smarttimetable.main.Model.TimetableFragmentsAdapter;
 import smarttimetable.main.Model.debug;
 import smarttimetable.main.R;
-import smarttimetable.main.windows.MainActivity;
 
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
-public class TimetableFragment extends Fragment implements FragmentNotifier {
+public class TimetableIFragment extends Fragment implements IFragmentNotifier {
     @Override
     public void Notify() {
         debug.log("Notify Work","TimetableFragment");
@@ -54,7 +47,7 @@ public class TimetableFragment extends Fragment implements FragmentNotifier {
     TimetableFragmentsAdapter pageAdapter;
     TabLayout tabLayout;
 
-    public TimetableFragment() {
+    public TimetableIFragment() {
         // Required empty public constructor
     }
 
@@ -124,8 +117,8 @@ public class TimetableFragment extends Fragment implements FragmentNotifier {
 
     }
 
-    public static TimetableFragment newInstance(int page) {
-        TimetableFragment fragment = new TimetableFragment();
+    public static TimetableIFragment newInstance(int page) {
+        TimetableIFragment fragment = new TimetableIFragment();
 
         Bundle args = new Bundle();
         args.putInt("num", page);

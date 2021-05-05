@@ -5,25 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import smarttimetable.main.Model.DBModels.DataBaseConnector;
-import smarttimetable.main.Model.DataBase;
 import smarttimetable.main.Model.DataBaseOperation;
-import smarttimetable.main.Model.DateTimeOperation;
-import smarttimetable.main.Model.FragmentNotifier;
+import smarttimetable.main.Model.IFragmentNotifier;
 import smarttimetable.main.Model.LessonsListAdapter;
-import smarttimetable.main.Model.debug;
 import smarttimetable.main.R;
 
 
-public class HomeFragment extends Fragment implements FragmentNotifier  {
+public class HomeIFragment extends Fragment implements IFragmentNotifier {
 
     ListView lv_TodayLessons;
     LessonsListAdapter lessonsListAdapter;

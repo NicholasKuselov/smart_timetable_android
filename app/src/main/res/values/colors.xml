@@ -21,7 +21,7 @@
     <color name="LessonListItemTextColorSecondary">#717f94</color>
     <color name="LessonListDivider">#1e324e</color>
 
-
+    <color name="bSaveSetting">#009a9a</color>
 
     <color name="NavViewBackground">#182a4d</color>
     <color name="HeaderBackground">#192a3f</color>

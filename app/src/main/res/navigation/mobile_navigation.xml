@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="smarttimetable.main.fragments.HomeFragment"
+        android:name="smarttimetable.main.fragments.HomeIFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_all_lessons"
-        android:name="smarttimetable.main.fragments.AllLessonsFragment"
+        android:name="smarttimetable.main.fragments.AllLessonsIFragment"
         android:label="@string/menu_all_lessons"
         tools:layout="@layout/fragment_all_lessons" />
 
     <fragment
         android:id="@+id/nav_user_lessons"
-        android:name="smarttimetable.main.fragments.UserLessonsFragment"
+        android:name="smarttimetable.main.fragments.UserLessonsIFragment"
         android:label="@string/menu_user_lessons"
         tools:layout="@layout/fragment_user_lessons" />
 </navigation>

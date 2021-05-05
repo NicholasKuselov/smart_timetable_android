@@ -7,13 +7,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.ArrayList;
 
 import smarttimetable.main.fragments.TimetablePage;
-import smarttimetable.main.fragments.TimetableFragment;
+import smarttimetable.main.fragments.TimetableIFragment;
 
 public class TimetableFragmentsAdapter extends FragmentStateAdapter {
 
     public ArrayList<TimetablePage> pages = new ArrayList<>();
 
-    public TimetableFragmentsAdapter(TimetableFragment fragmentActivity) {
+    public TimetableFragmentsAdapter(TimetableIFragment fragmentActivity) {
         super(fragmentActivity);
     }
 
