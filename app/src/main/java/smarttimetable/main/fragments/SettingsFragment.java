@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import smarttimetable.main.Model.DBModels.Course;
@@ -20,7 +21,7 @@ import smarttimetable.main.Model.IFragmentNotifier;
 import smarttimetable.main.R;
 import smarttimetable.main.setting.Setting;
 
-public class SettingsFragment extends Fragment implements IFragmentNotifier {
+public class SettingsFragment extends Fragment implements IFragmentNotifier, View.OnClickListener {
 
     ArrayAdapter<Group> sp_groupAdapter;
     ArrayAdapter<Course> sp_coursesAdapter;
@@ -62,12 +63,19 @@ public class SettingsFragment extends Fragment implements IFragmentNotifier {
 
         View root = inflater.inflate(R.layout.fragment_settings, container, false);
 
+        userGroupId = Setting.GetUserGroup();
+        userCourseId = Setting.GetUserCourse();
+
+
+        Button b_Save = root.findViewById(R.id.bSaveSetting);
+        b_Save.setOnClickListener(this);
+
         Spinner sp_groups = (Spinner)root.findViewById(R.id.sp_groups);
         sp_groupAdapter = new ArrayAdapter<Group>(this.getActivity(), R.layout.week_spinner, DataBase.Groups);
         sp_groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_groups.setAdapter(sp_groupAdapter);
 
-        //if (currentWeekPos!=-1) spinner.setSelection(currentWeekPos);
+        if (userGroupId!=-1) sp_groups.setSelection(DataBase.Groups.indexOf(DataBaseOperation.GetGroupById(userGroupId)));
         //spinner.setSelection();
         AdapterView.OnItemSelectedListener sp_groupItemSelectedListener = new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,9 +97,7 @@ public class SettingsFragment extends Fragment implements IFragmentNotifier {
         sp_coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_courses.setAdapter(sp_coursesAdapter);
 
-        //if (currentWeekPos!=-1) spinner.setSelection(currentWeekPos);
-        //spinner.setSelection();
-
+        if (userCourseId!=-1) sp_courses.setSelection(DataBase.Courses.indexOf(DataBaseOperation.GetCourseById(userCourseId)));
         AdapterView.OnItemSelectedListener sp_coursesItemSelectedListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -110,5 +116,10 @@ public class SettingsFragment extends Fragment implements IFragmentNotifier {
     @Override
     public void Notify() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        OnSaveButtonClick(v);
     }
 }

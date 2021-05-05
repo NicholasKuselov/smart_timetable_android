@@ -70,7 +70,7 @@
         android:layout_marginRight="0dp"
         android:layout_marginBottom="60dp"
         android:background="@color/bSaveSetting"
-        android:onClick="OnSaveButtonClick"
+
         android:text="@string/b_SaveSetting"
         android:textColor="#fff"
         android:textSize="24sp"

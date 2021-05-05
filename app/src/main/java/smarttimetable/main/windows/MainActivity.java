@@ -1,10 +1,12 @@
 package smarttimetable.main.windows;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AllLessonsIFragment fg_allLessons;
     private UserLessonsIFragment fg_UserLessons;
 
+    ProgressBar pb_connection;
     Toolbar toolbar;
 
     Button b_NoConnetion;
@@ -56,12 +59,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        pb_connection = findViewById(R.id.pb_connect);
         b_NoConnetion = (Button)findViewById(R.id.b_NoConnectionButton);
         b_NoConnetion.setVisibility(View.GONE);
 
         Setting.CreateSetting(this);
-        Setting.SetUser(3,5); //ipz 1
+        //Setting.SetUser(3,5); //ipz 1
         Cache.context = this;
 
         CreateFragments();
@@ -97,12 +100,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
+
+
+
     }
 
 
     @Override
     public void OnConnected(DataBaseConnector.ConnectionResult connectionResult)
     {
+        pb_connection.setVisibility(View.GONE);
         switch (connectionResult)
         {
             case NoConnection:
@@ -130,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case Error:
+                b_NoConnetion.setVisibility(View.VISIBLE);
+                Cache.Read(this);
                 break;
         }
 
@@ -207,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void CreateFragments()
     {
+
         try {
             fg_allLessons = AllLessonsIFragment.class.newInstance();
             fg_home = HomeIFragment.class.newInstance();
@@ -220,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void Connect()
     {
+        pb_connection.setVisibility(View.VISIBLE);
         DataBaseConnector dataBaseConnector = new DataBaseConnector(this);
         dataBaseConnector.execute();
     }
