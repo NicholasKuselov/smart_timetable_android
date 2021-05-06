@@ -9,10 +9,89 @@
     android:background="@drawable/background_main">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_nextLesson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="@string/tv_NextLesson"
+        android:textAlignment="center"
+        android:textColor="@color/WhiteForeground"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_nextLessonNull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv_NextLessonNull"
+        android:textAlignment="center"
+        android:textColor="@color/LessonListItemTextColorSecondary"
+        android:textSize="24sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nextLessonInfo"
+     >
+
+        <TextView
+            android:id="@+id/tv_nextLessonName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_TodayLessons"
+            android:textAlignment="center"
+            android:textColor="@color/WhiteForeground"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_nextLessonTimeLeft"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv_nextLessonTime"/>
+        <TextView
+            android:id="@+id/tv_nextLessonTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_TodayLessons"
+            android:textAlignment="center"
+            android:textColor="@color/LessonListItemTextColorSecondary"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_nextLessonTimeLeftValue"
+            app:layout_constraintLeft_toRightOf="@id/tv_nextLessonName"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_nextLessonTimeLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_NextLessonTimeLeft"
+            android:textAlignment="center"
+            android:textColor="@color/WhiteForeground"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_nextLessonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_nextLessonTimeLeftValue"/>
+
+        <TextView
+            android:id="@+id/tv_nextLessonTimeLeftValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_TodayLessons"
+            android:textAlignment="center"
+            android:textColor="@color/WhiteForeground"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_nextLessonTime"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_nextLessonTimeLeft"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/tv_TodayLessons"
         android:textAlignment="center"
         android:textColor="@color/WhiteForeground"
@@ -23,6 +102,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_todayLessonsNull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv_TodayLessonNull"
+        android:textAlignment="center"
+        android:textColor="@color/LessonListItemTextColorSecondary"
+        android:textSize="24sp" />
 
     <ListView
         android:id="@+id/lv_LessonsToday"

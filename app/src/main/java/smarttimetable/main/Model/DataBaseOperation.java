@@ -125,6 +125,21 @@ public class DataBaseOperation {
         return tmp;
     }
 
+    public static Lesson GetNextLessonByUser()
+    {
+        ArrayList<Lesson> tmp = GetTodayLessonByUser();
+        List<String> times = new ArrayList<>();
+        for (int i = 0; i< tmp.size(); i++)
+        {
+            times.add(tmp.get(i).getTime().substring(0,5));
+        }
+
+        int res = DateTimeOperation.GetNextLessonIndex(times);
+        if(res == -1) return null;
+        return tmp.get(res);
+    }
+
+
     public static List<Lesson> GetLessonsByDay(ArrayList<Lesson> lessons, Day day)
     {
         List<Lesson> tmp = new ArrayList<>();

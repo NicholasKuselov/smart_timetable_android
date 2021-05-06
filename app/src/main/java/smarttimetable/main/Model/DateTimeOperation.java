@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class DateTimeOperation
@@ -33,8 +34,8 @@ public class DateTimeOperation
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         String dateText = dateFormat.format(currentDate);
-        debug.log("currentdate",dateText);
-        return "22.02.2021";
+
+        return dateText;
     }
 
     public static String GetDayAfter(int DayAfterCount,String dateString)
@@ -58,5 +59,42 @@ public class DateTimeOperation
         return dateFormat.format(newDate);
     }
 
+    public static int GetNextLessonIndex(List<String> dateStrings) //debug
+    {
+
+        Date currentDate = new Date();
+
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+/*
+        Date currentDate = null;
+        try {
+            currentDate = dateFormat.parse("15:04");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+ */
+        String dateText = dateFormat.format(currentDate);
+
+        int res = -1;
+        long diff = 0;
+        for (int i = 0; i < dateStrings.size(); i++) {
+            Date date;
+            try {
+                date = dateFormat.parse(dateStrings.get(i));
+                long diffLocal = date.getTime() - currentDate.getTime();
+                if(diffLocal<=0) continue;
+                if (diffLocal<diff || diff==0){
+                    diff = diffLocal;
+                    res = i;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return -1;
+            }
+        }
+
+        return res;
+    }
 
 }

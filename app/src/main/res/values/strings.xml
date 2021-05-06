@@ -20,6 +20,10 @@
 
     <!-- Home Fragment -->
     <string name="tv_TodayLessons">Заняття сьогодні</string>
+    <string name="tv_NextLessonTimeLeft">Часу залишилося</string>
+    <string name="tv_NextLesson">Наступне заняття</string>
+    <string name="tv_NextLessonNull">Заняття відсутнє</string>
+    <string name="tv_TodayLessonNull">Занять немає</string>
 
     <!-- Days Fragment -->
     <string name="firstDay">Понеділок</string>
